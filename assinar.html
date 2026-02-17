@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Assinatura Digital - Athena TI</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>
+                <img src="favicon.png" alt="Logo" style="height: 32px; vertical-align: middle; margin-right: 5px; border-radius: 4px;">
+                GestorOS Sign
+            </h1>
+            <p>Plataforma de Assinatura Digital Segura</p>
+        </header>
+
+        <div id="step-upload" class="step active">
+            <div class="upload-box" onclick="document.getElementById('file-input').click()">
+                <div class="icon-circle"><i class="fas fa-file-pdf"></i></div>
+                <h3>Abrir Documento</h3>
+                <p>Toque aqui para selecionar o PDF gerado</p>
+                <input type="file" id="file-input" accept="application/pdf" hidden>
+            </div>
+            <p id="loading-msg" style="display:none; text-align:center; margin-top:15px; color:#3B82F6; font-weight:bold;">
+                <i class="fas fa-spinner fa-spin"></i> Processando documento...
+            </p>
+        </div>
+
+        <div id="step-sign" class="step">
+            
+            <div class="toolbar">
+                <button class="tab-btn active" onclick="switchTab('type')">
+                    <i class="fas fa-keyboard"></i> Digitar Nome
+                </button>
+                <button class="tab-btn" onclick="switchTab('draw')">
+                    <i class="fas fa-pen-nib"></i> Desenhar
+                </button>
+            </div>
+
+            <div class="signature-area">
+                <div id="mode-type" class="sign-mode">
+                    <label>Seu Nome Completo:</label>
+                    <input type="text" id="type-input" placeholder="Ex: João da Silva" oninput="updateTypedSignature()">
+                    <div class="font-preview" id="font-preview">Sua Assinatura</div>
+                </div>
+
+                <div id="mode-draw" class="sign-mode" style="display:none;">
+                    <label>Faça sua assinatura abaixo:</label>
+                    <div class="canvas-wrapper" id="canvas-wrapper">
+                        <canvas id="draw-canvas"></canvas>
+                    </div>
+                    <button class="clear-btn" onclick="clearCanvas()">
+                        <i class="fas fa-eraser"></i> Limpar
+                    </button>
+                </div>
+            </div>
+
+            <div class="instruction">
+                <i class="fas fa-hand-pointer"></i> <strong>Arraste a caixa amarela</strong> para posicionar sua assinatura no documento.
+            </div>
+
+            <div class="pdf-wrapper" id="pdf-wrapper">
+                <canvas id="pdf-render"></canvas>
+                <div id="drag-box">
+                    <span id="drag-text">Assinatura</span>
+                </div>
+            </div>
+
+            <div class="terms">
+                <input type="checkbox" id="terms-check">
+                <label for="terms-check">Declaro que li e aceito assinar este documento digitalmente com validade jurídica.</label>
+            </div>
+
+            <button class="action-btn" onclick="finishSignature()">
+                <i class="fas fa-file-signature"></i> ASSINAR E BAIXAR PDF
+            </button>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>Desenvolvido por <strong>Athena TI</strong></p>
+        <a href="https://wa.me/5565981294974" target="_blank" class="wpp-link">
+            <i class="fab fa-whatsapp"></i> Suporte Técnico: (65) 98129-4974
+        </a>
+    </footer>
+
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    
+    <script>
+        // Configuração Obrigatória do Worker PDF.js
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+        }
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

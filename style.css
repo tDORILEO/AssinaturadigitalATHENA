@@ -1,0 +1,168 @@
+:root {
+    --primary: #0F172A;
+    --accent: #2563EB;
+    --bg: #F1F5F9;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg);
+    margin: 0; padding: 10px;
+    display: flex; 
+    flex-direction: column; /* Alterado para empilhar Container e Footer */
+    align-items: center;    /* Centralizar */
+    justify-content: center;
+    min-height: 100vh;
+    color: #334155;
+}
+
+.container {
+    background: var(--card);
+    width: 100%; max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    padding: 20px;
+    overflow: hidden;
+    margin-bottom: 20px; /* Espaço para o footer */
+}
+
+header { text-align: center; margin-bottom: 25px; }
+header h1 { margin: 0; color: var(--primary); font-size: 24px; }
+header p { margin: 5px 0; color: #64748B; font-size: 14px; }
+
+.step { display: none; }
+.step.active { display: block; animation: fadeIn 0.3s; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Upload Area */
+.upload-box {
+    border: 2px dashed var(--accent);
+    background: #EFF6FF;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.upload-box:active { background: #DBEAFE; transform: scale(0.98); }
+.icon-circle {
+    background: white; width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.icon-circle i { font-size: 24px; color: var(--accent); }
+
+/* Toolbar */
+.toolbar { display: flex; gap: 10px; margin-bottom: 20px; }
+.tab-btn {
+    flex: 1; padding: 12px; border: none; border-radius: 8px;
+    background: var(--bg); color: #64748B; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.tab-btn.active { background: var(--primary); color: white; }
+
+/* Signature Area */
+.signature-area { 
+    border: 1px solid var(--border); 
+    border-radius: 8px; 
+    padding: 15px; 
+    margin-bottom: 20px;
+}
+
+label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+
+/* Input Texto */
+#type-input {
+    width: 100%; padding: 12px; border: 1px solid var(--border);
+    border-radius: 6px; font-size: 16px; outline: none;
+}
+#type-input:focus { border-color: var(--accent); }
+
+.font-preview {
+    font-family: 'Great Vibes', cursive;
+    font-size: 36px; text-align: center; margin-top: 15px; 
+    color: var(--primary); min-height: 50px;
+}
+
+/* Canvas Desenho */
+.canvas-wrapper {
+    width: 100%;
+    height: 180px;
+    background: #fff;
+    border: 2px solid #CBD5E1;
+    border-radius: 8px;
+    position: relative;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+#draw-canvas {
+    display: block; width: 100%; height: 100%;
+}
+
+.clear-btn {
+    margin-top: 8px; background: #EF4444; color: white; border: none;
+    padding: 8px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; float: right;
+}
+
+/* PDF Preview */
+.instruction {
+    background: #FFF7ED; color: #C2410C; padding: 12px; border-radius: 6px;
+    font-size: 13px; margin-bottom: 15px; text-align: center; border: 1px solid #FFEDD5;
+}
+
+.pdf-wrapper {
+    position: relative; width: 100%; overflow: hidden;
+    border: 1px solid var(--border); background: #525659;
+}
+#pdf-render { width: 100%; display: block; }
+
+/* Drag Box */
+#drag-box {
+    position: absolute; top: 50px; left: 50px;
+    width: 160px; height: 70px;
+    border: 2px solid #F59E0B;
+    background: rgba(245, 158, 11, 0.2);
+    cursor: move;
+    display: flex; align-items: center; justify-content: center;
+    user-select: none; touch-action: none; z-index: 10;
+}
+
+#drag-text {
+    font-family: 'Great Vibes', cursive; font-size: 24px;
+    color: #000; pointer-events: none;
+}
+
+/* Footer e Termos */
+.terms { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; margin: 20px 0; color: #475569; }
+.action-btn {
+    width: 100%; padding: 16px; border: none; border-radius: 8px;
+    background: var(--accent); color: white; font-size: 16px; font-weight: bold;
+    cursor: pointer; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+}
+.action-btn:hover { background: #1D4ED8; }
+
+/* --- NOVO ESTILO DO RODAPÉ (FOOTER) --- */
+.app-footer {
+    text-align: center;
+    color: #94A3B8;
+    font-size: 12px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+.app-footer p { margin: 5px 0; }
+.app-footer strong { color: var(--primary); }
+.wpp-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #25D366; /* Cor do WhatsApp */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.2s;
+}
+.wpp-link:hover { color: #128C7E; text-decoration: underline; }
